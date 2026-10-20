@@ -1,0 +1,61 @@
+/* A small host on the far left; edible introduction directly to its right. */
+.reference-home.hero{grid-template-columns:minmax(270px,.85fr) minmax(0,1.15fr);grid-template-rows:auto auto;align-items:center;column-gap:65px;row-gap:25px;padding:95px 10% 65px 5%;min-height:0}
+.reference-home .hero-character-scene{grid-column:1;grid-row:1;height:285px;min-height:285px;align-self:center}
+.reference-home .hero-copy{grid-column:2;grid-row:1;margin-top:0;align-self:center}
+.reference-home .standing-greeting{height:285px;min-height:285px}
+.reference-home .standing-mascot{left:-10px;bottom:0;width:120px;height:235px}
+.reference-home .robot-bubble.pixel-welcome{left:110px;top:12px;width:calc(100% - 105px);padding:20px 11px 13px}
+.reference-home .pixel-welcome .robot-dialogue p{font-size:11px;min-height:75px}
+.reference-home .pixel-welcome small{font-size:8px}
+.reference-home .standing-greeting .robot-hello{left:115px;top:25px}
+.reference-home .closed-bubble-launch{left:110px;top:95px;width:calc(100% - 105px);padding:0}
+.reference-home .hero-workstation{grid-column:2;grid-row:2;justify-self:end;align-self:start;width:min(100%,480px);margin:0 0 25px}
+.reference-home .hero-workstation .workstation{margin:0 -10px}
+.reference-home h1{font-size:clamp(38px,4vw,58px)}
+/* One visual size from the start button through escape and normal gameplay. */
+.pacman-launch-card .launch-character,.launch-character.launch-escaping{width:40px;height:40px}
+.pacman-launch-card .launch-character{left:0;top:29px}
+.pacman-launch-card{height:96px}
+.pacman-launch-card .pacman-button-surface{padding-left:45px;padding-right:7px}
+.pacman-launch-card .pacman-button-title{font-size:11px}
+.pacman-launch-card .pacman-blue-button{font-size:16px;padding:8px 5px}
+.pacman-launch-card .pacman-blue-button b{font-size:12px;margin-left:5px}
+@media(min-width:1450px){.reference-home.hero{column-gap:85px;grid-template-columns:minmax(300px,.8fr) minmax(0,1.2fr)}}
+@media(max-width:1000px){.reference-home.hero{grid-template-columns:minmax(245px,.9fr) minmax(0,1.1fr);column-gap:35px;padding-top:85px}.reference-home .standing-mascot{width:105px;height:220px}.reference-home .robot-bubble.pixel-welcome{left:95px;width:calc(100% - 90px)}.reference-home .closed-bubble-launch{left:95px;width:calc(100% - 90px)}.reference-home h1{font-size:38px}.pacman-launch-card .pacman-blue-button{font-size:14px}}
+@media(max-width:750px){.reference-home.hero{grid-template-columns:1fr;grid-template-rows:auto auto auto;padding:60px 9% 65px 6%;row-gap:28px}.reference-home .hero-character-scene{grid-column:1;grid-row:1;width:min(100%,365px);height:260px;min-height:260px;justify-self:start}.reference-home .hero-copy{grid-column:1;grid-row:2;margin-top:0}.reference-home .hero-workstation{grid-column:1;grid-row:3;width:min(100%,480px);justify-self:end;margin-top:5px}.reference-home .standing-greeting{height:260px;min-height:260px}.reference-home .standing-mascot{width:105px;height:215px}.reference-home .robot-bubble.pixel-welcome{left:110px;top:0;width:calc(100% - 105px)}.reference-home .closed-bubble-launch{left:110px;width:calc(100% - 105px)}.reference-home .pixel-welcome .robot-dialogue p{min-height:62px}.reference-home h1{font-size:42px}.pacman-launch-card .pacman-blue-button{font-size:16px}}
+/* Keep document-space portal and game-layer coordinates aligned. */
+#root{display:flow-root}
+/* Lift the greeting and introduction; pair About with the desk below. */
+.reference-home.hero{padding-top:60px;row-gap:30px}
+.reference-home .hero-character-scene{transform:translateY(-20px)}
+.reference-home .hero-copy{align-self:start;margin-top:-15px}
+.reference-home .hero-about{grid-column:1;grid-row:2;align-self:start;padding:10px 0 0;margin:0;max-width:none;display:block;border:0}
+.hero-about .section-heading{margin-bottom:20px}
+.hero-about .section-heading h2{font-size:28px;letter-spacing:-1px}
+.hero-about .about-body p{font-size:13px;line-height:1.95;margin:0}
+.hero-about .about-body p+p{margin-top:15px}
+.reference-home .pixel-welcome .robot-dialogue p{min-height:0}
+.reference-home .pixel-welcome small{display:block;margin:8px 0 0;font-size:9px;line-height:1.7}
+.reference-home .hero-workstation{align-self:center}
+@media(max-width:1000px){.reference-home.hero{padding-top:50px}.hero-about .about-body p{font-size:12px}.hero-about .section-heading h2{font-size:26px}}
+@media(max-width:750px){.reference-home.hero{padding-top:45px;grid-template-rows:auto auto auto auto;row-gap:28px}.reference-home .hero-character-scene{transform:translateY(-12px)}.reference-home .hero-copy{margin-top:-12px}.reference-home .hero-about{grid-column:1;grid-row:3;padding-top:0}.reference-home .hero-workstation{grid-row:4}.hero-about .about-body p{font-size:13px}}
+
+/* Reserve separate rows for the speech bubble and the smaller robot. */
+.reference-home .hero-character-scene{height:auto;min-height:390px}
+.reference-home .robot-greeting.static-greeting{display:flex;flex-direction:column;align-items:stretch;height:auto;min-height:390px;gap:18px;max-width:100%;position:relative}
+.reference-home .static-greeting .robot-bubble.pixel-welcome{position:relative;order:0;left:auto;top:auto;width:100%;max-width:310px;margin:24px 0 0 auto;flex:none}
+.reference-home .static-greeting .static-mascot{position:relative;order:1;left:auto;bottom:auto;align-self:flex-start;width:140px;height:155px;flex:none;margin:0 0 0 8px}
+.reference-home .static-greeting .robot-hello{position:relative;left:auto;top:auto;order:0;align-self:flex-end}
+.reference-home .static-greeting .closed-bubble-launch{position:relative;left:auto;top:auto;order:0;width:100%;max-width:260px;align-self:flex-end;padding:0}
+@media(max-width:750px){.reference-home .hero-character-scene{min-height:365px}.reference-home .robot-greeting.static-greeting{min-height:365px;gap:16px}.reference-home .static-greeting .static-mascot{width:125px;height:140px}.reference-home .static-greeting .robot-bubble.pixel-welcome{max-width:290px}}
+/* Small positioning adjustments for the greeting and introduction. */
+.reference-home .hero-copy{padding-left:28px}
+@media(max-width:750px){.reference-home .hero-copy{padding-left:12px}}
+
+/* Gentle final spacing, with the speech bubble kept in place. */
+.reference-home .static-greeting .static-mascot{width:150px;height:166px;margin-left:28px}
+.reference-home .hero-copy{padding-left:44px}
+.reference-home h1{word-spacing:.18em}
+@media(max-width:750px){.reference-home .static-greeting .static-mascot{width:135px;height:150px;margin-left:25px}.reference-home .hero-copy{padding-left:20px}}
+
+.reference-home.hero{background:transparent}
