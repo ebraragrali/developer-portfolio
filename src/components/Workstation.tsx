@@ -3,7 +3,7 @@
 export function Workstation({ language }: { language: Language }) {
   const labels = language === 'tr' ? ['Projeler', 'Oyun alanı', 'Yetenekler', 'Hakkımda'] : ['Projects', 'Playground', 'Skills', 'About']
   return <div className="workstation">
-    <svg viewBox="0 0 760 570" className="desk-svg" role="group" aria-label={language === 'tr' ? 'Monitör, klavye, devre kartı, defter ve oyun kumandası içeren çalışma masası' : 'Developer desk with monitor, keyboard, coiled cable, notebook and game controller'}>
+    <svg viewBox="0 0 760 570" className="desk-svg" role="group" aria-label={language === 'tr' ? 'Monitör, klavye, kablo, defter ve oyun kumandası içeren çalışma masası' : 'Developer desk with monitor, keyboard, coiled cable, notebook and game controller'}>
       <defs>
         <linearGradient id="desk" x2="0.8" y2="1"><stop stopColor="#443853"/><stop offset="1" stopColor="#1b1a2b"/></linearGradient>
         <linearGradient id="frame" x2="1" y2="1"><stop stopColor="#8a829d"/><stop offset=".5" stopColor="#343344"/><stop offset="1" stopColor="#191a29"/></linearGradient>

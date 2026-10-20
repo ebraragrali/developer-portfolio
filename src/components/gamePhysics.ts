@@ -1,5 +1,5 @@
 ﻿export type Point = { x: number; y: number }
-export const keyVectors: Record<string, readonly [number, number]> = {
+export const keyVectors: Readonly<Partial<Record<string, readonly [number, number]>>> = {
   w: [0,-1], arrowup: [0,-1], a: [-1,0], arrowleft: [-1,0],
   s: [0,1], arrowdown: [0,1], d: [1,0], arrowright: [1,0],
 }

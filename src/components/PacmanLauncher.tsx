@@ -1,18 +1,17 @@
 import { createPortal } from 'react-dom'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, type CSSProperties } from 'react'
 import { renderPacman } from './pacmanRenderer'
 import { welcomeExitFrame } from './greetingTimeline'
 import type { Language } from '../data/content'
 import './PacmanLauncher.css'
 type Phase='idle'|'eating'|'finished'
-export function PacmanLauncher({language,onExcited}:{language:Language;onExcited?:(value:boolean)=>void}) {
+export function PacmanLauncher({language}:{language:Language}) {
  const canvas=useRef<HTMLCanvasElement>(null)
  const root=useRef<HTMLDivElement>(null)
- const surface=useRef<HTMLSpanElement>(null)
  const character=useRef<HTMLSpanElement>(null)
  const frame=useRef(0)
  const busy=useRef(false)
- const origin=useRef({left:0,top:0,size:40})
+ const [launchOrigin,setLaunchOrigin]=useState({left:0,top:0,size:40})
  const [phase,setPhase]=useState<Phase>(()=>document.documentElement.classList.contains('pacman-started')?'finished':'idle')
  const tr=language==='tr'
  useEffect(()=>{if(phase==='idle' && canvas.current)renderPacman(canvas.current,.55,100)},[phase])
@@ -31,9 +30,9 @@ export function PacmanLauncher({language,onExcited}:{language:Language;onExcited
    if(!box)return
    busy.current=true;setPhase('eating');document.documentElement.classList.add('pacman-intro')
    const startCharacter=character.current?.getBoundingClientRect()
-   origin.current={left:startCharacter?.left ?? box.left,top:(startCharacter?.top ?? box.top)+window.scrollY,size:startCharacter?.width ?? 40}
+   const source={left:startCharacter?.left ?? box.left,top:(startCharacter?.top ?? box.top)+window.scrollY,size:startCharacter?.width ?? 40}
    const width=box.width
-   const source=origin.current
+   setLaunchOrigin(source)
    const consumedX=Math.min(document.documentElement.clientWidth-24,source.left+source.size/2+width-28)
    const destination={
     x:Math.min(document.documentElement.clientWidth-24,consumedX+100),
@@ -43,7 +42,7 @@ export function PacmanLauncher({language,onExcited}:{language:Language;onExcited
    const started=performance.now()
    const animate=(now:number)=>{
     const progress=(now-started)/duration
-    const start=origin.current
+    const start=source
     const step=welcomeExitFrame(progress,{x:start.left+start.size/2,y:start.top+start.size/2},width,document.documentElement.clientWidth,destination)
     const offsetX=step.x-(start.left+start.size/2)
     const offsetY=step.y-(start.top+start.size/2)
@@ -65,11 +64,11 @@ export function PacmanLauncher({language,onExcited}:{language:Language;onExcited
  },[])
  const label=tr?"Pac-Man’i Başlat":'Start Pac-Man'
  return <div className={`pacman-launch-card launch-${phase}`} ref={root} data-pacman-launch>
-  {phase==='eating' && createPortal(<span ref={character} className="launch-character launch-escaping" style={{left:origin.current.left,top:origin.current.top,width:origin.current.size,height:origin.current.size}} aria-hidden="true"><canvas ref={canvas} width="200" height="200"/></span>,document.body)}
-  <button className="pacman-launch-button" disabled={phase!=='idle'} onPointerEnter={()=>onExcited?.(true)} onPointerLeave={()=>onExcited?.(false)} onFocus={()=>onExcited?.(true)} onBlur={()=>onExcited?.(false)} onClick={()=>window.dispatchEvent(new Event('portfolio-play'))} aria-label={label}>
-   <span ref={surface} className="pacman-button-surface" aria-hidden="true"><span className="pacman-button-title">{tr?'Pac-Man’i':'Pac-Man'}</span><span className="pacman-blue-button">{Array.from(tr?'Başlat':'Start').map((letter,index)=><span key={index}>{letter}</span>)}<b>▶</b></span></span>
+  {phase==='eating' && createPortal(<span ref={character} className="launch-character launch-escaping" style={{left:launchOrigin.left,top:launchOrigin.top,width:launchOrigin.size,height:launchOrigin.size}} aria-hidden="true"><canvas ref={canvas} width="200" height="200"/></span>,document.body)}
+  <button className="pacman-launch-button" disabled={phase!=='idle'} onClick={()=>window.dispatchEvent(new Event('portfolio-play'))} aria-label={label}>
+   <span className="pacman-button-surface" aria-hidden="true"><span className="pacman-button-title">{tr?'Pac-Man’i':'Pac-Man'}</span><span className="pacman-blue-button">{Array.from(tr?'Başlat':'Start').map((letter,index)=><span key={index}>{letter}</span>)}<b>▶</b></span></span>
    {phase!=='eating' && <span ref={character} className="launch-character" aria-hidden="true"><canvas ref={canvas} width="200" height="200"/></span>}
-   <span className="bite-particles" aria-hidden="true">{Array.from({length:7},(_,index)=><i key={index} style={{'--particle':index} as React.CSSProperties}/>)}</span>
+   <span className="bite-particles" aria-hidden="true">{Array.from({length:7},(_,index)=><i key={index} style={{'--particle':index} as CSSProperties}/>)}</span>
   </button>
   <span className="launch-announcement" role="status">{phase==='eating'?(tr?'Pac-Man düğmeyi yiyor…':'Pac-Man is eating the button…'):phase==='finished'?(tr?'Oyun hazır. WASD veya yön tuşlarını kullanın.':'Game ready. Use WASD or arrow keys.'):''}</span>
  </div>
