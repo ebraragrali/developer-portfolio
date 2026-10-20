@@ -1,4 +1,4 @@
-﻿# Ebrar Ağralı — Developer Portfolio
+Portfolio
 
 React + TypeScript + Vite ile geliştirilen, Türkçe ve İngilizce destekli tek sayfalık kişisel portfolyo. Ek backend veya yeni çalışma zamanı bağımlılığı kullanılmaz.
 
